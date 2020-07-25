@@ -32,6 +32,16 @@ if(currentChar == '*')
     currentChar = *pattern;
     while(*input != currentChar)
     {
+        if(*input == '\"')
+        {
+            *buffer = *input;
+            buffer++;
+            while(*(++input) != '\"')
+            {
+                *buffer = *input;
+                buffer++;
+            }
+        }
 *buffer = *input;
 input++;
 buffer++;
@@ -66,7 +76,7 @@ return strings;
 
 int main(int argc, char* argv[])
 {
-string* regexpTest = regexp("int(string)\n", "*(*)\n");
+string* regexpTest = regexp("int(string\");\")\n", "*(*)\n");
 if(regexpTest == NULL)
 {
     fprintf(stderr, "regexpError while computing regexp\n");
