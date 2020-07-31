@@ -2,15 +2,42 @@
 #include <string.h>
 #include "regexp.h"
 
-string compileFunction(string input)
+void compileFunction(string input, FILE* output)
 {
     string* functionRegexp = regexp(input, "*(*);");
     if(functionRegexp == NULL)
     {
-        return NULL;
+        return;
     }
-    string result = malloc((strlen("call ")+strlen(*functionRegexp)+1)*sizeof(char));
-    strcpy(result, "call ");
-    strcat(result, *functionRegexp);
-    return result;
+    printf("%s\n", *functionRegexp);
+    functionRegexp++;
+    printf("%s\n", *functionRegexp);
+    fflush(stdout);
+    fprintf(output, "\n\t mov ");
+    void* paramsAnkor = (void*)*functionRegexp;
+    while(**functionRegexp != 0)
+    {
+        if(**functionRegexp == ',')
+        {
+            fprintf(output, "\n\t mov ");
+        }
+        else
+        {
+                if(**functionRegexp == '-')
+                {
+                    putc(',', output);
+                }
+                else
+                {
+                    putc(**functionRegexp, output);
+                }
+            }
+        (*functionRegexp)++;
+    }
+    *functionRegexp = (string)paramsAnkor;
+    free(*functionRegexp);
+    functionRegexp--;
+    fprintf(output, "\n\t call %s\n", *functionRegexp);
+    free(*functionRegexp);
+    free(functionRegexp);
 }

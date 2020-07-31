@@ -2,7 +2,7 @@ typedef char* string;
 
 void seekTo(char chr, string* str)
 {
-    while(**str != chr)
+    while(**str != chr && **str != 0)
     {
         if(**str == '\"')
         {
