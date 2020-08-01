@@ -1,1 +1,4 @@
+asm
+    print:
+    ret;
 print(al-65, bl-0, ah-0x0E, bh-0);

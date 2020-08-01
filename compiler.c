@@ -3,6 +3,7 @@
 #include "file.h"
 #include "string.h"
 #include "function.h"
+#include "asm.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,9 +23,8 @@ int main(int argc, char* argv[])
             printf("skipping \\n char\n");
             code++;
         }
-        printf("compiling function!\n");
+        compileAsmScript(code, output);
         compileFunction(code, output);
-        printf("compiled function!\n");
         seekTo(';', &code);
         code++;
     }

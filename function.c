@@ -9,6 +9,21 @@ void compileFunction(string input, FILE* output)
     {
         return;
     }
+    void* functionNameAnkor = (void*)*functionRegexp;
+    while(**functionRegexp != '\0')
+    {
+        if(**functionRegexp == '\n')
+        {
+            free(functionNameAnkor);
+            functionRegexp++;
+            free(*functionRegexp);
+            functionRegexp--;
+            free(functionRegexp);
+            return;
+        }
+        (*functionRegexp)++;
+    }
+    *functionRegexp = (string)functionNameAnkor;
     printf("%s\n", *functionRegexp);
     functionRegexp++;
     printf("%s\n", *functionRegexp);
