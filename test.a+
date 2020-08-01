@@ -1,2 +1,1 @@
-printf(ah-0);
-exit(al-0);
+print(al-65, bl-0, ah-0x0E, bh-0);
