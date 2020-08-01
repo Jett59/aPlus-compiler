@@ -10,5 +10,5 @@ void compileAsmScript(string input, FILE* output)
     {
         return;
     }
-    fprintf(output, *asmRegexp);
+    fprintf(output, "%s", *asmRegexp);
 }
